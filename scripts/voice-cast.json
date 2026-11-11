@@ -1,0 +1,6 @@
+{
+  "narrator": { "voice": "tr-TR-EmelNeural", "rate": "-4%", "pitch": "+0Hz" },
+  "kerim":    { "voice": "tr-TR-AhmetNeural", "rate": "-2%", "pitch": "+3Hz" },
+  "harun":    { "voice": "tr-TR-AhmetNeural", "rate": "+16%", "pitch": "-3Hz", "volume": "+15%" },
+  "taha":     { "voice": "tr-TR-AhmetNeural", "rate": "-12%", "pitch": "-16Hz" }
+}

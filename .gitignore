@@ -1,0 +1,7 @@
+node_modules/
+.claude/
+.env
+*.log
+.DS_Store
+public/audio/samples/
+public/voices.html

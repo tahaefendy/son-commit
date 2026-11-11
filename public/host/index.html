@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0c0f">
+  <title>SON COMMIT — İşten Atılmadan Önce</title>
+  <link rel="stylesheet" href="/s/host/host.css">
+</head>
+<body>
+<div id="viewport">
+  <div id="stage" data-phase="title" data-boss="" data-zone="0">
+    <div id="bg"></div>
+    <div id="grain"></div>
+
+    <!-- Açılış -->
+    <section id="sc-title" class="scene">
+      <div class="title-wrap">
+        <div class="title-company">HAT YAZILIM VE GELİŞTİRME LİMİTED ŞİRKETİ</div>
+        <h1 class="title-main"><span>SON</span> <span class="accent">COMMIT</span></h1>
+        <div class="title-sub">İşten Atılmadan Önce</div>
+        <div class="title-line"></div>
+        <div class="title-hint">Node.js ve Express ile REST API · Canlı katılımlı sunum oyunu</div>
+        <button id="title-start" class="big-btn" type="button">OYUNU BAŞLAT</button>
+        <div class="title-keys">Boşluk: İleri · P: Duraklat · Q: QR kod · F: Tam ekran · M: Ses</div>
+      </div>
+    </section>
+
+    <!-- Şirket tanıtımı -->
+    <section id="sc-company" class="scene">
+      <div class="company-wrap">
+        <div class="company-badge"><svg viewBox="0 0 120 120" width="120" height="120"><rect x="6" y="6" width="108" height="108" rx="18" fill="none" stroke="currentColor" stroke-width="6"/><text x="60" y="76" text-anchor="middle" font-size="46" font-weight="800" fill="currentColor" font-family="Helvetica, Arial, sans-serif">HAT</text></svg></div>
+        <div class="company-name">HAT Yazılım ve Geliştirme<br>Limited Şirketi</div>
+        <div class="card-grid" id="company-card"></div>
+      </div>
+    </section>
+
+    <!-- Sinematik hikâye -->
+    <section id="sc-story" class="scene"><div class="story-line"><span id="story-text"></span></div></section>
+
+    <!-- Ofis sahnesi: patron + diyalog + soru -->
+    <section id="sc-office" class="scene">
+      <div id="portrait"><div class="spotlight"></div><div class="svgwrap"></div></div>
+
+      <div id="taskbar"><span class="tk-no"></span><span class="tk-title"></span><span class="chip tk-diff"></span><span class="tk-boss"></span></div>
+
+      <div id="narr" class="narr"><div class="narr-label">GÖREV</div><p></p></div>
+      <div id="aux"></div>
+      <div id="bubble" class="bubble"><div class="who"></div><p></p></div>
+
+      <div id="qcard">
+        <div class="qhead">
+          <div class="timer"><svg viewBox="0 0 100 100"><circle class="trk" cx="50" cy="50" r="44"/><circle class="bar" cx="50" cy="50" r="44"/></svg><b>0</b></div>
+          <div class="qtitle"><small></small><h2></h2></div>
+          <div class="qvotes"><b>0</b><span>oy</span></div>
+        </div>
+        <div class="qask"></div>
+        <div class="tie-banner"></div>
+        <div class="opts"></div>
+        <div class="verdict-line"></div>
+      </div>
+
+      <div id="lobbyp">
+        <div class="lobby-qr"><img alt="QR kod" id="lobby-qr-img"><div class="lobby-url" id="lobby-url"></div></div>
+        <div class="lobby-info">
+          <div class="lobby-title">EKİBE KATIL</div>
+          <p>Telefonunuzdan QR kodu okutun, adınızı yazın ve ekibe katılın.</p>
+          <div class="lobby-count"><b id="lobby-count">0</b><span>katılımcı bağlı</span></div>
+          <div class="lobby-names" id="lobby-names"></div>
+          <div class="lobby-hint">Hazır olunca <kbd>Boşluk</kbd> ile ilk görevi başlatın.</div>
+        </div>
+      </div>
+
+      <div id="explain"></div>
+      <div id="salaryp"></div>
+      <div id="dossier"></div>
+      <div id="lockov">OYLAR KİLİTLENDİ</div>
+      <div id="nervepop"></div>
+    </section>
+
+    <section id="sc-blackout" class="scene"><div class="bo-cap"><small></small><h2></h2></div></section>
+
+    <!-- Final -->
+    <section id="sc-final" class="scene">
+      <div id="final-portrait"></div>
+      <div class="final-card" id="final-card"></div>
+      <div class="final-cameos" id="final-cameos"></div>
+      <div id="final-bubble" class="bubble"><div class="who"></div><p></p></div>
+    </section>
+
+    <!-- Sonuç ekranı -->
+    <section id="sc-results" class="scene"><div class="results-wrap" id="results-wrap"></div></section>
+
+    <!-- HUD -->
+    <header id="hud">
+      <div class="hud-row">
+        <div class="hud-brand"><div class="logo-mark">SC</div><div><b>SON COMMIT</b><small>HAT Yazılım · Junior Backend Developer</small></div></div>
+        <div class="hud-tasks" id="hud-tasks"></div>
+        <div class="hud-stats">
+          <div class="stat salary"><small>MAAŞ</small><b id="hud-salary">45.000 TL</b></div>
+          <div class="stat job"><small>İŞ GÜVENCESİ</small><b id="hud-job">Güvende</b></div>
+          <div class="stat proj"><small>PROJE</small><b id="hud-proj">Henüz başlamadı</b></div>
+        </div>
+      </div>
+      <div class="hud-nerve">
+        <div class="nerve-label">PATRONUN SİNİRİ</div>
+        <div class="nerve-track">
+          <div class="nerve-fill" id="nerve-fill"></div>
+          <i style="left:25%"></i><i style="left:50%"></i><i style="left:70%" class="cut"></i><i style="left:85%" class="fire"></i>
+          <div class="nerve-marks"><span style="left:12.5%">SAKİN</span><span style="left:37.5%">ŞÜPHECİ</span><span style="left:60%">SİNİRLİ</span><span style="left:77.5%">MAAŞ KESİNTİSİ</span><span style="left:92.5%">KOVULMA</span></div>
+        </div>
+        <div class="nerve-val"><b id="nerve-val">0</b>%<span id="nerve-zone">SAKİN</span></div>
+      </div>
+    </header>
+
+    <div id="fx"><div class="fx-flash"></div><div class="fx-ring"></div><div class="fx-hurry"></div><div class="fx-scan"></div></div>
+    <div id="letterbox"><i></i><i></i></div>
+    <div id="pausebadge">DURAKLATILDI</div>
+    <div id="fadeout"></div>
+  </div>
+</div>
+
+<!-- Yönetici paneli (fare hareketinde görünür) -->
+<nav id="dock" aria-label="Yönetici paneli">
+  <div class="dock-info">
+    <span class="dchip" title="Katılımcı sayısı">Katılımcı <b id="d-players">0</b></span>
+    <span class="dchip">Patron <b id="d-boss">—</b></span>
+    <span class="dchip">Sinir <b id="d-nerve">%0</b></span>
+    <span class="dchip">Maaş <b id="d-salary">45.000 TL</b></span>
+    <span class="dchip">Faz <b id="d-phase">—</b></span>
+    <span class="dchip conn" id="d-conn">Bağlanıyor…</span>
+  </div>
+  <div class="dock-btns">
+    <button id="b-start" type="button">Oyunu Başlat</button>
+    <button id="b-pause" type="button">Duraklat</button>
+    <button id="b-next" type="button" title="Boşluk">Sonraki Adım</button>
+    <button id="b-lock" type="button" title="L">Oyları Kilitle</button>
+    <button id="b-results" type="button" title="R">Sonuçları Göster</button>
+    <button id="b-nextq" type="button" title="N">Sonraki Soru</button>
+    <button id="b-restart" type="button">Soruyu Yeniden Başlat</button>
+    <button id="b-qr" type="button" title="Q">QR Kod</button>
+    <button id="b-sound" type="button" title="M">Ses: Açık</button>
+    <button id="b-full" type="button" title="F">Tam Ekran</button>
+    <button id="b-reset" type="button" class="danger">Sıfırla</button>
+  </div>
+</nav>
+
+<div id="qrmodal" class="modal" hidden>
+  <div class="modal-card qr-card">
+    <button class="modal-x" data-close type="button" aria-label="Kapat">×</button>
+    <h3>Katılmak için QR kodu okutun</h3>
+    <img id="qr-big" alt="QR kod">
+    <div class="qr-url" id="qr-url"></div>
+    <p>Telefonlar ve bu bilgisayar aynı ağda olmalıdır.</p>
+  </div>
+</div>
+
+<div id="confirm" class="modal" hidden>
+  <div class="modal-card">
+    <h3 id="confirm-title">Emin misiniz?</h3>
+    <p id="confirm-text"></p>
+    <div class="modal-btns"><button type="button" data-cancel>Vazgeç</button><button type="button" class="danger" data-ok>Evet</button></div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<button id="soundgate" type="button" hidden>Sesi etkinleştirmek için tıklayın</button>
+<div id="denied" class="modal" hidden><div class="modal-card"><h3>Yönetici erişimi gerekli</h3><p id="denied-text"></p></div></div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/s/shared/events.js"></script>
+<script src="/s/shared/audio.js"></script>
+<script src="/s/host/portraits.js"></script>
+<script src="/s/host/stage.js"></script>
+<script src="/s/host/host.js"></script>
+</body>
+</html>

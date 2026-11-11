@@ -1,0 +1,29 @@
+{
+  "name": "son-commit",
+  "version": "1.0.0",
+  "description": "SON COMMIT — İşten Atılmadan Önce: gerçek zamanlı, hikâye tabanlı sunum oyunu (Node.js + Express + Socket.IO)",
+  "main": "server/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node test/e2e.js",
+    "bots": "node scripts/bots.js",
+    "voice": "python3 scripts/generate-voice.py",
+    "voice:samples": "python3 scripts/voice-samples.py",
+    "build:static": "node scripts/build-static.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "peerjs": "^1.5.5",
+    "qrcode": "^1.5.4",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "socket.io-client": "^4.7.5"
+  }
+}

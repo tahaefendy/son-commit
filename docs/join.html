@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0f">
+  <title>Katıl — SON COMMIT</title>
+  <link rel="stylesheet" href="s/player/player.css">
+</head>
+<body>
+  <div class="top">
+    <div class="brand"><span class="mark">SC</span> SON COMMIT</div>
+    <div class="who"><span class="conn off" id="conn"></span><span id="connText">Bağlanıyor…</span></div>
+  </div>
+  <main>
+    <div class="hero">
+      <small>HAT YAZILIM VE GELİŞTİRME LTD. ŞTİ.</small>
+      <h1>SON <span>COMMIT</span></h1>
+      <p>İşten Atılmadan Önce<br>Ekibe katıl, patronların önündeki kararları birlikte ver.</p>
+    </div>
+    <form class="card" id="form" autocomplete="off">
+      <label for="name">Adın</label>
+      <input type="text" id="name" name="name" maxlength="20" placeholder="Örn. Ayşe" inputmode="text" autocapitalize="words" required>
+      <div class="err" id="err" hidden></div>
+      <button class="btn" id="go" type="submit" disabled>EKİBE KATIL</button>
+      <div class="hint">Her telefon yalnızca bir kez katılabilir ve her soruda bir oy kullanabilir.</div>
+    </form>
+  </main>
+  <script src="s/static/player-net.js"></script>
+  <script src="s/shared/events.js"></script>
+  <script src="s/player/join.js"></script>
+</body>
+</html>

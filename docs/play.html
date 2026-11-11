@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0f">
+  <title>Oyun — SON COMMIT</title>
+  <link rel="stylesheet" href="s/player/player.css">
+</head>
+<body data-zone="0">
+  <div class="top">
+    <div class="brand"><span class="mark">SC</span> SON COMMIT</div>
+    <div class="who"><span class="conn off" id="conn"></span><b id="pname">…</b></div>
+  </div>
+  <main id="app">
+    <div class="card wait"><div class="pulse"></div><h2>Bağlanıyor…</h2><p>Lütfen bekleyin.</p></div>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="flash" id="flash"></div>
+  <script src="s/static/player-net.js"></script>
+  <script src="s/shared/events.js"></script>
+  <script src="s/player/play.js"></script>
+</body>
+</html>

@@ -5,3 +5,5 @@ node_modules/
 .DS_Store
 public/audio/samples/
 public/voices.html
+receipts/
+review-receipts/

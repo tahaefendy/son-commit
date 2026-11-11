@@ -130,7 +130,8 @@ PORT=3000 PUBLIC_URL=https://oyun.ornek.com ADMIN_KEY=gizli-bir-anahtar npm star
 | --- | --- |
 | `PORT` | Dinlenen port (varsayılan 3000) |
 | `PUBLIC_URL` | QR koddaki adres tabanı (ters vekil/alan adı arkasında gerekir) |
-| `ADMIN_KEY` | Ayarlanırsa yönetici ekranı `https://oyun.ornek.com/?key=gizli-bir-anahtar` ile açılır; anahtarsız bağlantılar yönetemez |
+| `ADMIN_KEY` | Ayarlanmazsa yönetim yalnızca sunucunun çalıştığı bilgisayardan (localhost) açılır. Ayarlanırsa yönetici ekranı `https://oyun.ornek.com/?key=gizli-bir-anahtar` ile açılır; anahtarsız bağlantılar yönetemez |
+| `TRUST_PROXY` | `1` ise ters vekilin `X-Forwarded-*` başlıkları güvenilir sayılır (varsayılan kapalı) |
 | `TIME_SCALE` | Yalnızca test için süre çarpanı (varsayılan 1) |
 
 Ters vekil (Nginx vb.) kullanıyorsanız WebSocket yükseltmesine izin verin (`Upgrade` / `Connection` başlıkları).

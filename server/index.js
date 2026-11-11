@@ -30,7 +30,8 @@ function createApp(opts = {}) {
 
   const app = express();
   app.disable('x-powered-by');
-  app.set('trust proxy', true);
+  const trustProxy = (opts.trustProxy ?? process.env.TRUST_PROXY) === true || process.env.TRUST_PROXY === '1';
+  if (trustProxy) app.set('trust proxy', true);
   const server = http.createServer(app);
   const io = new Server(server, { cors: { origin: false }, pingInterval: 10000, pingTimeout: 12000, maxHttpBufferSize: 2e4 });
 
@@ -40,9 +41,10 @@ function createApp(opts = {}) {
   const qrCache = new Map();
   const baseUrlFor = (req) => {
     if (publicUrl) return publicUrl;
-    const proto = req.headers['x-forwarded-proto'] || req.protocol || 'http';
+    const proto = (trustProxy && req.headers['x-forwarded-proto']) || req.protocol || 'http';
     const port = server.address() ? server.address().port : 3000;
-    let hostHeader = req.headers['x-forwarded-host'] || req.headers.host || `localhost:${port}`;
+    let hostHeader = (trustProxy && req.headers['x-forwarded-host']) || req.headers.host || `localhost:${port}`;
+    if (!/^[a-z0-9.\-:\[\]]+$/i.test(hostHeader)) hostHeader = `localhost:${port}`;
     const hostname = hostHeader.replace(/:\d+$/, '').replace(/^\[|\]$/g, '');
     if (['localhost', '127.0.0.1', '::1'].includes(hostname)) {
       const ip = lanAddresses()[0];
@@ -72,6 +74,7 @@ function createApp(opts = {}) {
   const info = async (req) => {
     const joinUrl = `${baseUrlFor(req)}/join`;
     if (!qrCache.has(joinUrl)) {
+      if (qrCache.size >= 16) qrCache.delete(qrCache.keys().next().value);
       qrCache.set(joinUrl, await QRCode.toDataURL(joinUrl, { margin: 1, width: 640, errorCorrectionLevel: 'M', color: { dark: '#0b0c0f', light: '#ffffff' } }));
     }
     return { joinUrl, qr: qrCache.get(joinUrl) };
@@ -82,7 +85,7 @@ function createApp(opts = {}) {
 
   app.use((req, res) => res.status(404).type('text').send('Sayfa bulunamadı.'));
 
-  attachSockets(io, game, registry, { adminKey });
+  attachSockets(io, game, registry, { adminKey, trustProxy });
 
   const listen = (port = Number(process.env.PORT) || 3000, host = process.env.HOST || '0.0.0.0') =>
     new Promise((resolve) => server.listen(port, host, () => resolve(server.address().port)));

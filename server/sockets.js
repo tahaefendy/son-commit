@@ -23,7 +23,9 @@ function safeEqual(a, b) {
   return d === 0;
 }
 
-function attachSockets(io, game, registry, { adminKey = '', getInfo } = {}) {
+const isLoopback = (addr) => /^(::1|127\.0\.0\.1|::ffff:127\.0\.0\.1|local)$/.test(String(addr || ''));
+
+function attachSockets(io, game, registry, { adminKey = '', getInfo, trustProxy = false } = {}) {
   const joinHits = new Map(); // ip -> [timestamps]
 
   const joinAllowed = (ip) => {
@@ -57,14 +59,17 @@ function attachSockets(io, game, registry, { adminKey = '', getInfo } = {}) {
 
   io.on('connection', (socket) => {
     const xff = socket.handshake.headers && socket.handshake.headers['x-forwarded-for'];
-    const ip = (xff ? xff.split(',')[0].trim() : '') || socket.handshake.address;
+    const ip = (trustProxy && xff ? xff.split(',').pop().trim() : '') || socket.handshake.address;
     const voteLimit = makeLimiter(6, 8);
 
     /* ---------------- Yönetici ---------------- */
     socket.on(C.HOST_HELLO, (payload, ack) => {
       const key = payload && typeof payload.key === 'string' ? payload.key : '';
-      if (adminKey && !safeEqual(key, adminKey)) {
-        socket.emit(S.HOST_DENIED, { message: 'Yönetici anahtarı gerekli veya hatalı. Adresin sonuna ?key=ANAHTAR ekleyin.' });
+      const allowed = adminKey ? safeEqual(key, adminKey) : isLoopback(socket.handshake.address);
+      if (!allowed) {
+        socket.emit(S.HOST_DENIED, { message: adminKey
+          ? 'Yönetici anahtarı gerekli veya hatalı. Adresin sonuna ?key=ANAHTAR ekleyin.'
+          : 'Yönetim yalnızca sunucunun çalıştığı bilgisayardan açılabilir. Başka cihazdan yönetmek için ADMIN_KEY ayarlayın ve adresin sonuna ?key=ANAHTAR ekleyin.' });
         return;
       }
       socket.data.isHost = true;

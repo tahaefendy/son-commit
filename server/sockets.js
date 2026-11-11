@@ -65,7 +65,13 @@ function attachSockets(io, game, registry, { adminKey = '', getInfo, trustProxy 
     /* ---------------- Yönetici ---------------- */
     socket.on(C.HOST_HELLO, (payload, ack) => {
       const key = payload && typeof payload.key === 'string' ? payload.key : '';
-      const allowed = adminKey ? safeEqual(key, adminKey) : isLoopback(socket.handshake.address);
+      // Anahtar yoksa yalnızca doğrudan (vekilsiz) localhost bağlantısı yönetebilir
+      const h = socket.handshake.headers || {};
+      const proxied = trustProxy || h['x-forwarded-for'] || h['x-real-ip'] || h.forwarded;
+      // Başka bir web sayfasından (CSWSH) gelen bağlantıyı engelle: Origin, sunucunun kendi adresiyle aynı olmalı
+      let sameOrigin = true;
+      if (h.origin) { try { sameOrigin = new URL(h.origin).host === h.host; } catch (e) { sameOrigin = false; } }
+      const allowed = adminKey ? safeEqual(key, adminKey) : (!proxied && sameOrigin && isLoopback(socket.handshake.address));
       if (!allowed) {
         socket.emit(S.HOST_DENIED, { message: adminKey
           ? 'Yönetici anahtarı gerekli veya hatalı. Adresin sonuna ?key=ANAHTAR ekleyin.'
